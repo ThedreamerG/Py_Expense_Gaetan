@@ -52,7 +52,7 @@ def add_expense(infos):
     len_spenders = len(spenders)
     money_per_spender = float(amount) / len_spenders
     for spender in spenders:
-        csv.write(money_per_spender + "," + label + "," + spender + "\n")
+        csv.write(str(money_per_spender) + "," + label + "," + spender)
     csv.close()
     # Add the new expense to the list of expenses
     for spender in spenders:
