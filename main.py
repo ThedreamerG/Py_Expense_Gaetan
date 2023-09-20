@@ -1,6 +1,6 @@
 from PyInquirer import prompt
 from examples import custom_style_2
-from expense import expense_questions,new_expense,CreateNewUser
+from expense import expense_questions,new_expense,CreateNewUser, Add_all_spenders
 import os.path
 
 pathExpenses = 'Expenses.csv'
@@ -38,6 +38,8 @@ def main():
         createCSVExpenses()
     if (not check_file_Users):
         createCSVUsers()
+    else :	
+        Add_all_spenders()
     ask_option()
 
 main()
