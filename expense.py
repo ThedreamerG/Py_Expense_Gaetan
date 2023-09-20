@@ -21,7 +21,7 @@ expense_questions = [
     },
     {
         "type":"list",
-        "name":"spenders",
+        "name":"spender",
         "message":"New Expense - Spender(s): ",
         "choices": UsersList,
     },
@@ -48,19 +48,20 @@ user_questions = [
 def add_expense(infos):
     amount = infos["amount"]
     label = infos["label"]
-    spenders = infos["spenders"]
+    spender = infos["spender"]
     payback = infos["payback"]
+
+    # Check if the amount is a number
+    if (not check_if_number(amount)):
+        return False
+    
     if (UsersList == []):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
-
-    csv.write(str(money_per_spender) + "," + label + "," + spender)
-        
+    csv.write(amount + "," + label + "," + spender + "," + payback)
     csv.close()
     # Add the new expense to the list of expenses
-    for spender in spenders:
-        Expense.append([money_per_spender, label, spender])
     return True	
 
 
@@ -106,6 +107,13 @@ def Add_all_expenses():
     csv = open("Expenses.csv", "r")
     csv.readline() # Skip the first line (header)
     for line in csv:
-        [amount, label, spender] = line.split(",")
-        Expense.append([amount, label, spender])
+        [amount, label, spender, payback] = line.split(",")
+        Expense.append([amount, label, spender, payback])
     csv.close()
+
+def check_if_number(number):
+    try:
+        float(number)
+        return True
+    except ValueError:
+        return False
