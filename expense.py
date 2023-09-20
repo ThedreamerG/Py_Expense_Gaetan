@@ -59,7 +59,7 @@ def add_expense(infos):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
-    csv.write(amount + "," + label + "," + spender + "," + payback)
+    csv.write(amount + "," + label + "," + spender + "," + str(payback))
     csv.close()
     # Add the new expense to the list of expenses
     return True	
