@@ -48,12 +48,15 @@ def add_expense(infos):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
-    len_spenders =
-    csv.write(amount + "," + label + "," + spender + "\n")
+    # Split the amount between the spenders
+    len_spenders = len(spenders)
+    money_per_spender = float(amount) / len_spenders
+    for spender in spenders:
+        csv.write(money_per_spender + "," + label + "," + spender + "\n")
     csv.close()
-
     # Add the new expense to the list of expenses
-    Expense.append([amount, label, spender])
+    for spender in spenders:
+        Expense.append([money_per_spender, label, spender])
     return True	
 
 
