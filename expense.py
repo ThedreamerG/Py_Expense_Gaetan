@@ -25,6 +25,8 @@ expense_questions = [
         "name":"spender(s)",
         "message":"New Expense - Spender(s): ",
         "choices": UsersList
+        'validate': lambda answer: 'You must choose at least one topping.' \
+            if len(answer) == 0 else True
     },
 ]
 
