@@ -66,7 +66,6 @@ def add_expense(infos):
     # Add the new expense to the list of expenses
     return True	
 
-
 def new_expense(*args):
     infos = prompt(expense_questions)
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
@@ -149,6 +148,6 @@ def show_status():
                 OptimizedExpense.append([float(amount)/len(payback), user, spender])
     # show the optimized expenses
     for optimizedExpense in OptimizedExpense:
-        print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0]))      
+        print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0] + "$"))      
     return True
     
