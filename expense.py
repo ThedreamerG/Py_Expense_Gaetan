@@ -137,12 +137,16 @@ def show_status():
     for expense in Expense:
         [amount, label, spender, payback] = expense
         for user in payback:
-            # if the spender and the payback user are already in the list then add the amount to the amount of the expense
+            # check if the user is the spender
+            if (user == spender):
+                continue
+            # check if the user already has an optimized expense
             for optimizedExpense in OptimizedExpense:
-                if (spender == optimizedExpense[1] and user == optimizedExpense[2]):
+                if (optimizedExpense[1] == user and optimizedExpense[2] == spender):
                     optimizedExpense[0] += float(amount)/len(payback)
                     break
-            #
+            else:
+                OptimizedExpense.append([float(amount)/len(payback), user, spender])
     # show the optimized expenses
     for optimizedExpense in OptimizedExpense:
         print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0]))      
