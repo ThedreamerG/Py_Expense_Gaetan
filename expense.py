@@ -51,7 +51,7 @@ def add_expense(infos):
     label = infos["label"]
     # clean by removing the last 'new line' character
     spender = infos["spender"].replace("\n", "")
-    payback = infos["payback"].foreach(lambda x: x.replace("\n", ""))
+    payback = infos["payback"]
 
     # Check if the amount is a number
     if (not check_if_number(amount)):
