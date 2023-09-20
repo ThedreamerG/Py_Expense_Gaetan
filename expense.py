@@ -1,6 +1,7 @@
 from PyInquirer import prompt
 import os.path
-path = './Expenses.csv'
+pathExpenses = './Expenses.csv'
+pathUsers = './Users.csv'
 
 expense_questions = [
     {
@@ -18,14 +19,16 @@ expense_questions = [
         "name":"spender",
         "message":"New Expense - Spender: ",
     },
-
 ]
 
+user_questions = [
+    {
+        "type":"input",
+        "name":"name",
+        "message":"New User - Name: ",
+    }
+]
 
-def createCSV():
-    csv = open("Expenses.csv", "w")
-    csv.write("Amount,Label,Spender\n")
-    csv.close()
 
 def add_expense(infos):
     amount = infos["amount"]
@@ -39,15 +42,16 @@ def add_expense(infos):
 def new_expense(*args):
     infos = prompt(expense_questions)
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
-    print(infos)
-
-    check_file = os.path.isfile(path)
-    if (check_file):
-        csv = open("Expenses.csv", "x")
-    else:
-        createCSV()
     add_expense(infos)
     print("Expense Added !")
     return True
 
 
+def CreateNewUser(*args):
+    print("Create New User")
+    infos = prompt(expense_questions)
+    # Writing the informations on external file might be a good idea (╯°□°)╯︵ ┻━┻
+    user_name = infos["name"]
+    csv = open("Users.csv", "a")
+    csv.write(user_name + "\n")
+    return True
