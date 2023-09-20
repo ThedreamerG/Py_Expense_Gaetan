@@ -106,3 +106,4 @@ def Add_all_expenses():
         Expense.append([amount, label, spender])
     csv.close()
 
+def check_if_number():
