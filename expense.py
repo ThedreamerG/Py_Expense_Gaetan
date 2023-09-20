@@ -22,10 +22,10 @@ expense_questions = [
     {
         "type":"checkbox",
         'qmark': '😃',
-        "name":"spender(s)",
+        "name":"spenders",
         "message":"New Expense - Spender(s): ",
-        "choices": UsersList
-        'validate': lambda answer: 'You must choose at least one topping.' \
+        "choices": UsersList,
+        "validate": lambda answer: 'You must choose at least one topping.' \
             if len(answer) == 0 else True
     },
 ]
@@ -42,12 +42,13 @@ user_questions = [
 def add_expense(infos):
     amount = infos["amount"]
     label = infos["label"]
-    spender = infos["spender"]
+    spenders = infos["spenders"]
     # Check if the spender is in the list of users
     if (UsersList == []):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
+    len_spenders =
     csv.write(amount + "," + label + "," + spender + "\n")
     csv.close()
 
