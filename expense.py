@@ -46,6 +46,7 @@ user_questions = [
 ]
 
 
+
 def add_expense(infos):
     amount = infos["amount"]
     label = infos["label"]
