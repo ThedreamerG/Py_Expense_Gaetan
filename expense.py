@@ -33,7 +33,7 @@ expense_questions = [
         "message":"New Expense - PayBack(s): ",
         "choices": UsersList,
         "validate": lambda answer: 'You must choose at least one topping and different from the user choosen.' \
-            if len(answer) == 0 else True
+            if len(answer) == 0  or answer == answer[0] else True
     },
 ]
 
@@ -51,7 +51,7 @@ def add_expense(infos):
     label = infos["label"]
     # clean by removing the last 'new line' character
     spender = infos["spender"].replace("\n", "")
-    payback = infos["payback"]
+    payback = [user.replace("\n", "") for user in infos["payback"]]
 
     # Check if the amount is a number
     if (not check_if_number(amount)):
