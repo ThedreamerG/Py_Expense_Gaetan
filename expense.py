@@ -1,4 +1,6 @@
 from PyInquirer import prompt
+import os.path
+path = './Expenses.csv'
 
 expense_questions = [
     {
@@ -26,7 +28,9 @@ def new_expense(*args):
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
     print(infos)
 
-    f = open("Expenses.csv", "x")
+    check_file = os.path.isfile(path)
+    if (check_file):
+        csv = 
 
     csv = open("Expenses.csv", "a")
 
