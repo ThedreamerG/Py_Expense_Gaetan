@@ -8,6 +8,7 @@ Expense = []
 UsersList = []
 
 
+
 expense_questions = [
     {
         "type":"input",
@@ -48,8 +49,9 @@ user_questions = [
 def add_expense(infos):
     amount = infos["amount"]
     label = infos["label"]
-    spender = infos["spender"]
-    payback = infos["payback"]
+    # clean by removing the last 'new line' character
+    spender = infos["spender"].replace("\n", "")
+    payback = infos["payback"].foreach(lambda x: x.replace("\n", ""))
 
     # Check if the amount is a number
     if (not check_if_number(amount)):
@@ -57,7 +59,7 @@ def add_expense(infos):
     
     if (UsersList == []):
         Add_all_spenders()
-    # spender is in the list of users
+    # Spender is in the list of users
     csv = open("Expenses.csv", "a")
     csv.write(amount + "," + label + "," + spender + "," + str(payback))
     csv.close()
@@ -117,3 +119,24 @@ def check_if_number(number):
         return True
     except ValueError:
         return False
+    
+def show_status():
+    print("Show Status")
+    Add_all_expenses()
+    OprimizedExpense = []
+    ## add the amount of each expense to the spender for each payback user
+    for expense in Expense:
+        [amount, spender, payback] = expense
+        for user in payback:
+            # if the spender and the payback user are already in the list then add the amount to the amount of the expense
+            for optimizedExpense in OprimizedExpense:
+                if (spender == optimizedExpense[1] and user == optimizedExpense[2]):
+                    optimizedExpense[0] += amount/len(payback)
+                    break
+            # if the spender and the payback user are not in the list then add the expense to the list
+            OprimizedExpense.append([amount/len(payback), spender, user])
+    # show the optimized expenses
+    for optimizedExpense in OprimizedExpense:
+        print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0]))      
+    return True
+    

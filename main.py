@@ -1,6 +1,6 @@
 from PyInquirer import prompt
 from examples import custom_style_2
-from expense import expense_questions,new_expense,CreateNewUser, Add_all_spenders
+from expense import expense_questions,new_expense,CreateNewUser, Add_all_spenders, show_status
 import os.path
 
 pathExpenses = 'Expenses.csv'
@@ -29,6 +29,9 @@ def ask_option():
         ask_option()
     elif (option['main_options']) == "New User":
         CreateNewUser()
+        ask_option()
+    elif (option['main_options']) == "Show Status":
+        show_status()
         ask_option()
 
 def main():
