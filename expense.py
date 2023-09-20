@@ -113,7 +113,8 @@ def Add_all_expenses():
     # read the last element as a list
     for line in csv:
         [amount, label, spender, payback] = line.split(",")
-        paybacks = payback.split("-")
+        # extract the paybacks ['ewq'-'zxc'] -> ['ewq','zxc']
+        paybacks = payback.replace("[","").replace("]","").replace("'","").split("-")
         Expense.append([amount, label, spender, paybacks])
     csv.close()
     print(Expense)
