@@ -61,7 +61,7 @@ def add_expense(infos):
         Add_all_spenders()
     # Spender is in the list of users
     csv = open("Expenses.csv", "a")
-    csv.write(amount + "," + label + "," + spender + "," + str(payback))
+    csv.write(amount + "," + label + "," + spender + "," + str(payback).replace(", ","-") + "\n")
     csv.close()
     # Add the new expense to the list of expenses
     return True	
@@ -70,8 +70,10 @@ def add_expense(infos):
 def new_expense(*args):
     infos = prompt(expense_questions)
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
-    add_expense(infos)
-    print("Expense Added !")
+    if (add_expense(infos)) :
+        print("Expense Added")
+    else :
+        print("Failure!!")
     return True
 
 
@@ -108,10 +110,13 @@ def Add_all_spenders():
 def Add_all_expenses():
     csv = open("Expenses.csv", "r")
     csv.readline() # Skip the first line (header)
+    # read the last element as a list
     for line in csv:
         [amount, label, spender, payback] = line.split(",")
-        Expense.append([amount, label, spender, payback])
+        paybacks = payback.split("-")
+        Expense.append([amount, label, spender, paybacks])
     csv.close()
+    print(Expense)
 
 def check_if_number(number):
     try:
@@ -126,15 +131,15 @@ def show_status():
     OprimizedExpense = []
     ## add the amount of each expense to the spender for each payback user
     for expense in Expense:
-        [amount, spender, payback] = expense
+        [amount, label, spender, payback] = expense
         for user in payback:
             # if the spender and the payback user are already in the list then add the amount to the amount of the expense
             for optimizedExpense in OprimizedExpense:
                 if (spender == optimizedExpense[1] and user == optimizedExpense[2]):
-                    optimizedExpense[0] += amount/len(payback)
+                    optimizedExpense[0] += float(amount)/len(payback)
                     break
             # if the spender and the payback user are not in the list then add the expense to the list
-            OprimizedExpense.append([amount/len(payback), spender, user])
+            OprimizedExpense.append([float(amount)/len(payback), spender, user])
     # show the optimized expenses
     for optimizedExpense in OprimizedExpense:
         print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0]))      
