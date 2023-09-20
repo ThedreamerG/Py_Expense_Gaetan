@@ -8,7 +8,7 @@ pathUsers = 'Users.csv'
 
 def createCSVExpenses():
     csv = open("Expenses.csv", "w")
-    csv.write("Amount,Label,Spender\n")
+    csv.write("Amount,Label,Spender,paybac\n")
     csv.close()
 def createCSVUsers():
     csv = open("Users.csv", "w")

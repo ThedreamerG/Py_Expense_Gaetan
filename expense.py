@@ -20,12 +20,18 @@ expense_questions = [
         "message":"New Expense - Label: ",
     },
     {
-        "type":"checkbox",
-        'qmark': '😃',
+        "type":"list",
         "name":"spenders",
         "message":"New Expense - Spender(s): ",
         "choices": UsersList,
-        "validate": lambda answer: 'You must choose at least one topping.' \
+    },
+    {
+        "type":"checkbox",
+        'qmark': '😃',
+        "name":"payback",
+        "message":"New Expense - PayBack(s): ",
+        "choices": UsersList,
+        "validate": lambda answer: 'You must choose at least one topping and different from the user choosen.' \
             if len(answer) == 0 else True
     },
 ]
@@ -43,16 +49,14 @@ def add_expense(infos):
     amount = infos["amount"]
     label = infos["label"]
     spenders = infos["spenders"]
-    # Check if the spender is in the list of users
+    payback = infos["payback"]
     if (UsersList == []):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
-    # Split the amount between the spenders
-    len_spenders = len(spenders)
-    money_per_spender = float(amount) / len_spenders
-    for spender in spenders:
-        csv.write(str(money_per_spender) + "," + label + "," + spender)
+
+    csv.write(str(money_per_spender) + "," + label + "," + spender)
+        
     csv.close()
     # Add the new expense to the list of expenses
     for spender in spenders:
@@ -105,5 +109,3 @@ def Add_all_expenses():
         [amount, label, spender] = line.split(",")
         Expense.append([amount, label, spender])
     csv.close()
-
-def check_if_number():
