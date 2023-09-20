@@ -25,6 +25,8 @@ expense_questions = [
         "name":"spender(s)",
         "message":"New Expense - Spender(s): ",
         "choices": Users.map(lambda user: {"name": user})
+        "validate": lambda answer: "You must choose at least one user." \
+            if len(answer) == 0 else True
     },
 ]
 
