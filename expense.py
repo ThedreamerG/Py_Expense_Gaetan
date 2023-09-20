@@ -24,7 +24,7 @@ expense_questions = [
         'qmark': '😃',
         "name":"spender(s)",
         "message":"New Expense - Spender(s): ",
-        "choices": Users.map(lambda user: {"name": user})
+        "choices": UsersList
     },
 ]
 
@@ -42,7 +42,7 @@ def add_expense(infos):
     label = infos["label"]
     spender = infos["spender"]
     # Check if the spender is in the list of users
-    if (Users == []):
+    if (UsersList == []):
         Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
@@ -52,7 +52,6 @@ def add_expense(infos):
     # Add the new expense to the list of expenses
     Expense.append([amount, label, spender])
     return True	
-    
 
 
 def new_expense(*args):
@@ -74,6 +73,11 @@ def CreateNewUser(*args):
     print("User Added !")
     # Add the new user to the list of users
     Users.append(user_name)
+    UsersList.append(
+        {
+            "name":user_name
+        }
+    )
     return True
 
 def Add_all_spenders():
@@ -81,6 +85,11 @@ def Add_all_spenders():
     csv.readline() # Skip the first line (header)
     for line in csv:
         Users.append(line)
+        UsersList.append(
+            {
+                "name": line
+            }
+        )
     csv.close()
 
 def Add_all_expenses():
