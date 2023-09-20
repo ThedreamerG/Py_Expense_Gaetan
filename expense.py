@@ -97,6 +97,7 @@ def CreateNewUser(*args):
 
 def Add_all_spenders():
     csv = open("Users.csv", "r")
+    Users.clear()
     csv.readline() # Skip the first line (header)
     for line in csv:
         Users.append(line)
@@ -108,6 +109,7 @@ def Add_all_spenders():
     csv.close()
 
 def Add_all_expenses():
+    Expense.clear()
     csv = open("Expenses.csv", "r")
     csv.readline() # Skip the first line (header)
     # read the last element as a list
@@ -130,20 +132,19 @@ def check_if_number(number):
 def show_status():
     print("Show Status")
     Add_all_expenses()
-    OprimizedExpense = []
+    OptimizedExpense = []
     ## add the amount of each expense to the spender for each payback user
     for expense in Expense:
         [amount, label, spender, payback] = expense
         for user in payback:
             # if the spender and the payback user are already in the list then add the amount to the amount of the expense
-            for optimizedExpense in OprimizedExpense:
+            for optimizedExpense in OptimizedExpense:
                 if (spender == optimizedExpense[1] and user == optimizedExpense[2]):
                     optimizedExpense[0] += float(amount)/len(payback)
                     break
-            # if the spender and the payback user are not in the list then add the expense to the list
-            OprimizedExpense.append([float(amount)/len(payback), spender, user])
+            #
     # show the optimized expenses
-    for optimizedExpense in OprimizedExpense:
+    for optimizedExpense in OptimizedExpense:
         print(optimizedExpense[1] + " owes " + optimizedExpense[2] + " " + str(optimizedExpense[0]))      
     return True
     
