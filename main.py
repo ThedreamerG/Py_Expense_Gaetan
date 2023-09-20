@@ -1,6 +1,6 @@
 from PyInquirer import prompt
 from examples import custom_style_2
-from expense import expense_questions,new_expense
+from expense import expense_questions,new_expense,CreateNewUser
 import os.path
 
 pathExpenses = './Expenses.csv'
@@ -26,6 +26,9 @@ def ask_option():
     option = prompt(main_option)
     if (option['main_options']) == "New Expense":
         new_expense()
+        ask_option()
+    elif (option['main_options']) == "New User":
+        CreateNewUser()
         ask_option()
 
 def main():

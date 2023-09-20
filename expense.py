@@ -49,9 +49,11 @@ def new_expense(*args):
 
 def CreateNewUser(*args):
     print("Create New User")
-    infos = prompt(expense_questions)
+    infos = prompt(user_questions)
     # Writing the informations on external file might be a good idea (╯°□°)╯︵ ┻━┻
     user_name = infos["name"]
     csv = open("Users.csv", "a")
     csv.write(user_name + "\n")
+    csv.close()
+    print("User Added !")
     return True
