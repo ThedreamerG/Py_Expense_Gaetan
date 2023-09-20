@@ -5,6 +5,7 @@ pathUsers = './Users.csv'
 
 Users = []
 Expense = []
+UsersList = []
 
 
 expense_questions = [
@@ -19,9 +20,11 @@ expense_questions = [
         "message":"New Expense - Label: ",
     },
     {
-        "type":"input",
-        "name":"spender",
-        "message":"New Expense - Spender: ",
+        "type":"checkbox",
+        'qmark': '😃',
+        "name":"spender(s)",
+        "message":"New Expense - Spender(s): ",
+        "choices": Users.map(lambda user: {"name": user})
     },
 ]
 
@@ -39,9 +42,8 @@ def add_expense(infos):
     label = infos["label"]
     spender = infos["spender"]
     # Check if the spender is in the list of users
-    if (not check_if_spender_in_User(spender)):
-        print("Spender not found !")
-        return False
+    if (Users == []):
+        Add_all_spenders()
     # spender is in the list of users
     csv = open("Expenses.csv", "a")
     csv.write(amount + "," + label + "," + spender + "\n")
@@ -89,8 +91,3 @@ def Add_all_expenses():
         Expense.append([amount, label, spender])
     csv.close()
 
-def check_if_spender_in_User(spender):
-    if (spender in Users):
-        return True
-    else:
-        return False
