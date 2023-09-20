@@ -22,6 +22,19 @@ expense_questions = [
 ]
 
 
+def createCSV():
+    csv = open("Expenses.csv", "w")
+    csv.write("Amount,Label,Spender\n")
+    csv.close()
+
+def add_expense(infos):
+    amount = infos["amount"]
+    label = infos["label"]
+    spender = infos["spender"]
+    csv = open("Expenses.csv", "a")
+    csv.write(amount + "," + label + "," + spender + "\n")
+    csv.close()
+
 
 def new_expense(*args):
     infos = prompt(expense_questions)
@@ -30,11 +43,10 @@ def new_expense(*args):
 
     check_file = os.path.isfile(path)
     if (check_file):
-        csv = 
-
-    csv = open("Expenses.csv", "a")
-
-    # con
+        csv = open("Expenses.csv", "x")
+    else:
+        createCSV()
+    add_expense(infos)
     print("Expense Added !")
     return True
 
