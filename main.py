@@ -32,8 +32,8 @@ def ask_option():
         ask_option()
 
 def main():
-    check_file_Expense = os.pathExpenses.isfile(pathExpenses)
-    check_file_Users = os.pathUsers.isfile(pathUsers)
+    check_file_Expense = os.path.isfile(pathExpenses)
+    check_file_Users = os.path.isfile(pathUsers)
 
     if (check_file_Expense):
         csv = open("Expenses.csv", "x")
