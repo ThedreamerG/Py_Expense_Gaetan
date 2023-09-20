@@ -3,8 +3,8 @@ from examples import custom_style_2
 from expense import expense_questions,new_expense,CreateNewUser
 import os.path
 
-pathExpenses = './Expenses.csv'
-pathUsers = './Users.csv'
+pathExpenses = 'Expenses.csv'
+pathUsers = 'Users.csv'
 
 def createCSVExpenses():
     csv = open("Expenses.csv", "w")
@@ -34,14 +34,9 @@ def ask_option():
 def main():
     check_file_Expense = os.path.isfile(pathExpenses)
     check_file_Users = os.path.isfile(pathUsers)
-
-    if (check_file_Expense):
-        csv = open("Expenses.csv", "x")
-    else:
+    if (not check_file_Expense):
         createCSVExpenses()
-    if (check_file_Users):
-        csv = open("Users.csv", "x")
-    else:
+    if (not check_file_Users):
         createCSVUsers()
     ask_option()
 
